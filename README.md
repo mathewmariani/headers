@@ -1,2 +1,2 @@
 # headers
- single-file libraries for C/C++
+Single-file libraries for C/C++.
