@@ -1,0 +1,17 @@
+name: "Build & Test"
+
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: seanmiddleditch/gha-setup-ninja@master
+      - name: Test 🔧
+        run: |
+          cd tests
+          cmake --preset release
+          cmake --build --preset release
+          cd build/release
+          ./header-test

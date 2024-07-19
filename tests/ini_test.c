@@ -1,33 +1,30 @@
+#define TEST_NO_MAIN
 #include "acutest.h"
 
 #define INI_IMPL
 #include "ini.h"
 
-/* helper functions */
-
-ini_t* ini_load_from_file(const char* filename) {
-  FILE* f = fopen(filename, "rb");
-  if (!f) {
-    return NULL;
-  }
-
-  fseek(f, 0, SEEK_END);
-  int size = ftell(f);
-  fseek(f, 0, SEEK_SET);
-  char* data = (char*) malloc(size + 1);
-  fread(data, 1, size, f);
-  data[size] = '\0';
-  fclose(f);
-
-  ini_t* ini = ini_load(data);
-  free(data);
-  return ini;
-}
-
-/* internal functions */
+const char* data_str = 
+"; global section\n"
+"network = wireless\n"
+"; owner section\n"
+"[owner]\n"
+"name = John Doe\n"
+"organization = Acme Widgets Inc.\n"
+"; database section\n"
+"[database]\n"
+"server = 192.0.2.62\n"
+"port = 143\n"
+"file = payroll.dat\n"
+"; variables section\n"
+"[variables]\n"
+"int=1234\n"
+"float=12.34\n"
+"bool=true\n"
+"string=hello\n";
 
 void test_ini_find_section(void) {
-  ini_t* ini = ini_load_from_file("test.ini");
+  ini_t* ini = ini_load(data_str);
 
   TEST_CHECK(ini_find_section(ini, "owner") == 1);
   TEST_CHECK(ini_find_section(ini, "database") == 2);
@@ -35,7 +32,7 @@ void test_ini_find_section(void) {
 }
 
 void test_ini_section_exists(void) {
-  ini_t* ini = ini_load_from_file("test.ini");
+  ini_t* ini = ini_load(data_str);
 
   TEST_CHECK(ini_section_exists(ini, "owner") == true);
   TEST_CHECK(ini_section_exists(ini, "database") == true);
@@ -43,7 +40,7 @@ void test_ini_section_exists(void) {
 }
 
 void test_ini_property_exists(void) {
-  ini_t* ini = ini_load_from_file("test.ini");
+  ini_t* ini = ini_load(data_str);
 
   int owner_id = ini_find_section(ini, "owner");
   int database_id = ini_find_section(ini, "database");
@@ -61,7 +58,7 @@ void test_ini_property_exists(void) {
 }
 
 void test_ini_value(void) {
-  ini_t* ini = ini_load_from_file("test.ini");
+  ini_t* ini = ini_load(data_str);
 
   int owner_id = ini_find_section(ini, "owner");
   int database_id = ini_find_section(ini, "database");
@@ -84,7 +81,7 @@ void test_ini_value(void) {
 }
 
 void test_ini_value_as_int(void) {
-  ini_t* ini = ini_load_from_file("test.ini");
+  ini_t* ini = ini_load(data_str);
 
   int variables_id = ini_find_section(ini, "variables");
 
@@ -93,7 +90,7 @@ void test_ini_value_as_int(void) {
 }
 
 void test_ini_value_as_float(void) {
-  ini_t* ini = ini_load_from_file("test.ini");
+  ini_t* ini = ini_load(data_str);
 
   int variables_id = ini_find_section(ini, "variables");
 
@@ -102,7 +99,7 @@ void test_ini_value_as_float(void) {
 }
 
 void test_ini_value_as_bool(void) {
-  ini_t* ini = ini_load_from_file("test.ini");
+  ini_t* ini = ini_load(data_str);
 
   int variables_id = ini_find_section(ini, "variables");
 
@@ -111,17 +108,3 @@ void test_ini_value_as_bool(void) {
   TEST_CHECK(ini_value_as_bool(ini, variables_id, "bool") == true);
   TEST_CHECK(ini_value_as_bool(ini, variables_id, "string") == false);
 }
-
-TEST_LIST = {
-  /* internal functions */
-  { "ini_find_section", test_ini_find_section },
-  { "ini_section_exists", test_ini_section_exists },
-  { "ini_property_exists", test_ini_property_exists },
-  { "ini_value", test_ini_value },
-  { "ini_value_as_int", test_ini_value_as_int },
-  { "ini_value_as_float", test_ini_value_as_float },
-  { "ini_value_as_bool", test_ini_value_as_bool },
-
-  /* always last. */
-  { NULL, NULL }
-};

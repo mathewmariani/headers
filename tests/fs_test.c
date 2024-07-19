@@ -1,3 +1,4 @@
+#define TEST_NO_MAIN
 #include "acutest.h"
 
 #define FS_IMPL
@@ -361,29 +362,3 @@ void test_fs_remove_basepath(void) {
   TEST_CHECK(_fs.base_path[2].buf[0] == 0);
   TEST_CHECK(_fs.base_path[3].buf[0] == 0);
 }
-
-TEST_LIST = {
-  /* internal functions */
-  { "_fs_native_delete", test__fs_native_delete },
-  { "_fs_native_mkdir", test__fs_native_mkdir },
-  { "_fs_native_open", test__fs_native_open },
-  { "_fs_native_read", test__fs_native_read },
-  { "_fs_native_write", test__fs_native_write },
-
-  /* public functions */
-  { "fs_setup", test_fs_setup },
-  { "fs_append", test_fs_append },
-  { "fs_delete", test_fs_delete },
-  { "fs_exists", test_fs_exists },
-  { "fs_get_cwd", test_fs_get_cwd },
-  { "fs_get_info", test_fs_get_info },
-  { "fs_mkdir", test_fs_mkdir },
-  { "fs_read", test_fs_read },
-  { "fs_write", test_fs_write },
-
-  { "fs_insert_basepath", test_fs_insert_basepath },
-  { "fs_remove_basepath", test_fs_remove_basepath },
-
-  /* always last. */
-  { NULL, NULL }
-};
