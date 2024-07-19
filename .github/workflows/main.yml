@@ -14,6 +14,7 @@ jobs:
           version: 1.10.0
       - name: Build with Cmake 🔧
         run: |
+          cd ./tests
           cmake --preset release
           cmake --build --preset release
       - name: Test 🔧
