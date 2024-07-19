@@ -108,17 +108,3 @@ void test_ini_value_as_bool(void) {
   TEST_CHECK(ini_value_as_bool(ini, variables_id, "bool") == true);
   TEST_CHECK(ini_value_as_bool(ini, variables_id, "string") == false);
 }
-
-// TEST_LIST = {
-//   /* internal functions */
-//   { "ini_find_section", test_ini_find_section },
-//   { "ini_section_exists", test_ini_section_exists },
-//   { "ini_property_exists", test_ini_property_exists },
-//   { "ini_value", test_ini_value },
-//   { "ini_value_as_int", test_ini_value_as_int },
-//   { "ini_value_as_float", test_ini_value_as_float },
-//   { "ini_value_as_bool", test_ini_value_as_bool },
-
-//   /* always last. */
-//   { NULL, NULL }
-// };

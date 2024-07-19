@@ -310,7 +310,7 @@ static _fs_state_t _fs;
 
 /* private implementation functions */
 
-_FS_PRIVATE inline bool _fs_strempty(const _fs_path* str) {
+_FS_PRIVATE bool _fs_strempty(const _fs_path* str) {
   return 0 == str->buf[0];
 }
 
