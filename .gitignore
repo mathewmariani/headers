@@ -1,4 +1,7 @@
 .vscode/
 
+# output
+tests/build/
+
 # macOS
 .DS_Store

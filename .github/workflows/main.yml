@@ -1,0 +1,22 @@
+name: "Build & Test"
+
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+      - name: Setup Ninja 📦
+        uses: ashutoshvarma/setup-ninja@master
+        with:
+          version: 1.10.0
+      - name: Build with Cmake 🔧
+        run: |
+          cmake --preset release
+          cmake --build --preset release
+      - name: Test 🔧
+        run: |
+          cd build/release
+          ./header-test
