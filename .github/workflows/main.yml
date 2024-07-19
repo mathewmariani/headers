@@ -10,6 +10,7 @@ jobs:
       - uses: seanmiddleditch/gha-setup-ninja@master
       - name: Test 🔧
         run: |
+          cd tests
           cmake --preset release
           cmake --build --preset release
           cd build/release
