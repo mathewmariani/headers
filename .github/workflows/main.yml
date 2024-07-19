@@ -8,15 +8,14 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
-      - run: |
-          cd ./tests
       - name: Setup Ninja 📦
         uses: ashutoshvarma/setup-ninja@master
         with:
           version: 1.10.0
       - name: Build with Cmake 🔧
         run: |
-          cmake --preset release
+          cd ./tests
+          cmake --preset release -G Ninja
           cmake --build --preset release
       - name: Test 🔧
         run: |
