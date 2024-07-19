@@ -7,7 +7,11 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(TESTS_SRC
     fs_test.c
+    gtfs_test.c
     ini_test.c)
+
+add_subdirectory(libs)
 
 add_executable(header-test main.c ${TESTS_SRC})
 target_include_directories(header-test PRIVATE ..)
+target_include_directories(header-test PRIVATE libs)

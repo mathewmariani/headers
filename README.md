@@ -7,4 +7,5 @@ Single-file libraries for C/C++.
 ## Libraries
 
 - [**filesystem.h**](https://github.com/mathewmariani/headers/blob/master/filesystem.h): Filesystem interfacing.
+- [**gtfs.h**](https://github.com/mathewmariani/headers/blob/master/gtfs.h): General Transit Feed Specification (GTFS) parser.
 - [**ini.h**](https://github.com/mathewmariani/headers/blob/master/ini.h): Reading an INI file.
