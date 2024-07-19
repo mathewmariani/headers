@@ -6,18 +6,11 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v3
-      - name: Setup Ninja 📦
-        uses: ashutoshvarma/setup-ninja@master
-        with:
-          version: 1.10.0
-      - name: Build with Cmake 🔧
-        run: |
-          cd ./tests
-          cmake --preset release -G Ninja
-          cmake --build --preset release
+      - uses: actions/checkout@v4
+      - uses: seanmiddleditch/gha-setup-ninja@master
       - name: Test 🔧
         run: |
+          cmake --preset release
+          cmake --build --preset release
           cd build/release
           ./header-test
