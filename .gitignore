@@ -1,7 +1,7 @@
 .vscode/
 
 # output
-tests/build/
+build/
 
 # macOS
 .DS_Store
